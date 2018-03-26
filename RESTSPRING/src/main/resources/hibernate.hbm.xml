@@ -4,9 +4,9 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class name="bt.pre.restspring.entity.Car" table="CarTbl" lazy="false">
-        <id name = "id" type="int">
+        <id name = "id" type="Integer" unsaved-value="0">
             <column name="id"/>
-            <generator class="increment"/>
+            <generator class="identity"/>
         </id>
         <property name="Make" />
         <property name="Model"/>

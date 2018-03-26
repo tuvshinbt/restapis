@@ -34,11 +34,8 @@ public class HibernateCarDAOImpl implements CarDAO {
     @Override
     public List<Car> findAll() {
         Session session = sessionFactory.getCurrentSession();
-        List<Car> cars = session.createQuery("from CarTbl c").list();
+        List<Car> cars = session.createQuery("Select c from Car c").list();
         return cars;
-//        Query query = session.createQuery("select c from car c");
-//        List<Car> cars = (List<Car>) query.list();
-//        return cars;
 
 //        CriteriaBuilder cb = session.getCriteriaBuilder();
 //        CriteriaQuery<Car> cq = cb.createQuery(Car.class);
@@ -58,7 +55,9 @@ public class HibernateCarDAOImpl implements CarDAO {
     @Override
     public Integer create(Car car) {
         Session session = this.sessionFactory.getCurrentSession();
-        session.save(car);
+//        session.save(car);
+        session.persist(car);
+//        session.flush();
         return car.getId();
     }
 

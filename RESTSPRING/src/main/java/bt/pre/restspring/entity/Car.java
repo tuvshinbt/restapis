@@ -14,6 +14,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -21,7 +22,8 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author tuvshuu
  */
-@Entity(name = "CarTbl")
+@Entity
+@Table(name = "CarTbl")
 @XmlRootElement(name = "Car")
 public class Car implements Serializable {
 
