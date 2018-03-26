@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:sec="http://www.springframework.org/schema/security"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                    http://www.springframework.org/schema/beans/spring-beans.xsd
+                    http://www.springframework.org/schema/mvc
+                    http://www.springframework.org/schema/mvc/spring-mvc.xsd
+                    http://www.springframework.org/schema/context
+                    http://www.springframework.org/schema/context/spring-context.xsd
+                    http://www.springframework.org/schema/security
+                    http://www.springframework.org/schema/security/spring-security.xsd
+                    http://www.springframework.org/schema/aop 
+                    http://www.springframework.org/schema/aop/spring-aop.xsd
+">
+    <mvc:annotation-driven />
+    <!--    <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager"/>
+    <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+        <property name="mediaTypes">
+            <map>
+                <entry key="json" value="application/json" />
+                <entry key="xml" value="application/xml" />
+            </map>
+        </property>
+    </bean>-->
+    
+    
+<!--    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="jsonMessageConverter"/>
+            </list>
+        </property>
+    </bean>
+    
+     Configure bean to convert JSON to POJO and vice versa 
+    <bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="objectMapper" ref="objectMapper"/>
+    </bean>	-->
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/views/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+    
+    <mvc:resources mapping="/resources/**" location="/resources/" />
+    
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations" value="classpath:jdbc.properties"/>
+    </bean>
+    <bean id="carRestController" class="bt.pre.restspring.controller.CarRestController">
+        <property name="carService" ref="realCarServiceImpl"/>
+    </bean>
+    
+    <bean id="mockCarServiceImpl" 
+          init-method="initBeanMock" 
+          destroy-method="destroyBeanMock" 
+          class="bt.pre.restspring.service.MockCarServiceImpl" scope="prototype">
+        <qualifier value="mock"/>
+    </bean>
+    
+    <bean id="realCarServiceImpl" 
+          init-method="initBeanReal" 
+          destroy-method="destroyBeanReal" 
+          class="bt.pre.restspring.service.RealCarServiceImpl" scope="prototype">
+        <qualifier value="real"/>
+        <property name="carDAO" ref="hibernateCarDAOImpl"/>
+    </bean>
+    
+    <bean id="jdbcCarDAOImpl" class="bt.pre.restspring.dao.JdbcCarDAOImpl" >
+        <qualifier value="jdbc"/>
+        <property name="jdbcTemplate" ref="myDataSource"/>
+    </bean>
+    
+    <bean id="hibernateCarDAOImpl" class="bt.pre.restspring.dao.HibernateCarDAOImpl" >
+        <qualifier value="hibernate"/>
+        <property name="sessionFactory" ref="mySessionFactory"/>
+    </bean>
+    
+    <!--    <bean id="jpaCarDAOImpl" class="bt.pre.restspring.dao.JPACarDAOImpl" >
+        <qualifier value="jpa"/>
+    </bean>-->
+    
+    
+    <!-- AOP -->
+    <bean id="carAOPService" class="bt.pre.restspring.aop.CarAOPService" />
+    <aop:config>
+        <aop:aspect id="myAspect" ref="carAOPService">
+            <aop:pointcut id="carAOPServicePointcut" 
+                          expression="execution(* bt.pre.restspring.service.*.*(..))"/>
+            <aop:before 
+                pointcut-ref="carAOPServicePointcut" 
+                method="aopBeforeExam"/>
+            
+            <aop:after-returning
+                pointcut-ref="carAOPServicePointcut"
+                returning="retVal"
+                method="aopAfterReturningExam"/>
+            
+            <aop:after-throwing
+                pointcut-ref="carAOPServicePointcut"
+                method="aopAfterThrowingExam"/>
+            
+            <aop:after
+                pointcut-ref="carAOPServicePointcut"
+                method="aopAfterExam"/>
+            
+            <aop:around
+                pointcut-ref="carAOPServicePointcut"
+                method="aopAroundExam"/>
+
+        </aop:aspect>
+    </aop:config>
+    
+    <!--<context:component-scan base-package="bt.pre.restspring"/>-->
+    
+</beans>
