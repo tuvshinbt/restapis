@@ -28,7 +28,7 @@ public class RealCarServiceImpl implements CarService {
     }
 
     @Autowired
-//    @Qualifier("hibernate")
+//    @Qualifier("JdbcCarDAOImpl")
     private CarDAO carDAO;
 
     public CarDAO getCarDAO() {

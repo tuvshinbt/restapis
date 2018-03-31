@@ -6,13 +6,8 @@
 package bt.pre.restspring.dao;
 
 import bt.pre.restspring.entity.Car;
-import java.awt.print.Book;
 import java.util.List;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;

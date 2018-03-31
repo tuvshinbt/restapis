@@ -68,7 +68,7 @@
           destroy-method="destroyBeanReal" 
           class="bt.pre.restspring.service.RealCarServiceImpl" scope="prototype">
         <qualifier value="real"/>
-        <property name="carDAO" ref="hibernateCarDAOImpl"/>
+        <property name="carDAO" ref="jdbcCarDAOImpl"/>
     </bean>
     
     <bean id="jdbcCarDAOImpl" class="bt.pre.restspring.dao.JdbcCarDAOImpl" >
