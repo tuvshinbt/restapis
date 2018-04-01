@@ -5,67 +5,51 @@
  */
 package bt.pre.restjee.service;
 
+import bt.pre.restjee.dao.CarDAO;
 import bt.pre.restjee.entity.Car;
 import bt.pre.restjee.service.qualifier.RealCarQualifier;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 /**
  *
  * @author tuvshuu
  */
-@Stateless
-//@RealCarQualifier
-@Named("RealCarServiceImpl")
+//@Stateless
+@RealCarQualifier
+//@Named("RealCarServiceImpl")
 public class RealCarServiceImpl implements CarService {
-
-    @PersistenceContext(unitName = "PU_RESTJEE")
-    EntityManager em;
-
+    
+    @Inject
+    private CarDAO carDAO;
+    
     @Override
     public List<Car> getCars() {
-        List list = em.createQuery("SELECT c FROM Car c").getResultList();
-        if (list != null) {
-            return (List<Car>) list;
-        }
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return carDAO.findAll();
     }
-
+    
     @Override
     public Car getCar(Integer id) {
-        return em.find(Car.class, id);
+        return carDAO.findById(id);
     }
-
+    
     @Override
     public Integer createCar(Car car) {
-        em.persist(car);
-        em.flush();
-        return car.getId();
+        return carDAO.create(car);
     }
-
+    
     @Override
     public Boolean updateCar(Integer id, Car car) {
-        Car oldCar = em.find(Car.class, id);
-        if (oldCar != null) {
-            oldCar.setMake(car.getMake());
-            oldCar.setModel(car.getModel());
-            oldCar.setMiles(car.getMiles());
-            oldCar.setYear(car.getYear());
-            em.persist(oldCar);
-        }
+        carDAO.update(id, car);
         return true;
     }
-
+    
     @Override
     public Boolean deleteCar(Integer id) {
-        Car oldCar = em.find(Car.class, id);
-        if (oldCar != null) {
-            em.remove(oldCar);
-        }
+        carDAO.delete(id);
         return true;
     }
-
+    
 }

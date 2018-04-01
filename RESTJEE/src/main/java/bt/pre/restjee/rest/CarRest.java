@@ -54,7 +54,7 @@ import javax.ws.rs.core.Variant;
 @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 public class CarRest {
 
-    @EJB
+//    @EJB
     private ItemRemote itemEJB;
 
     @Context
@@ -65,16 +65,16 @@ public class CarRest {
     }
 
     @Inject
-//    @RealCarQualifier
-    @Named("RealCarServiceImpl")
+    @RealCarQualifier
+//    @Named("RealCarServiceImpl")
     private CarService carService;
 
-    @GET
-    @Path("/Item")
-    public Response getItem() {
-        String greeting = itemEJB.greeting("TUVSHUU");
-        return Response.ok("Greeting is - " + greeting).build();
-    }
+//    @GET
+//    @Path("/Item")
+//    public Response getItem() {
+//        String greeting = itemEJB.greeting("TUVSHUU");
+//        return Response.ok("Greeting is - " + greeting).build();
+//    }
 
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
