@@ -13,3 +13,5 @@ Implemented:
  # J2EE (SOAP)
       CDI, WEB-SERVICE, EJB
  # Core Java (SOAP)
+ # SESSION BEANS
+      CDI, EJB
