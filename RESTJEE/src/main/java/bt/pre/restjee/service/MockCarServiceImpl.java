@@ -18,7 +18,7 @@ import javax.inject.Named;
  *
  * @author tuvshuu
  */
-//@Stateless
+@Stateless
 @MockCarQualifier
 //@Named("MockCarServiceImpl")
 public class MockCarServiceImpl implements CarService {

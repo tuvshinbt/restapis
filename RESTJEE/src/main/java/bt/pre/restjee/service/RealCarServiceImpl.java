@@ -11,13 +11,12 @@ import bt.pre.restjee.service.qualifier.RealCarQualifier;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.inject.Named;
 
 /**
  *
  * @author tuvshuu
  */
-//@Stateless
+@Stateless
 @RealCarQualifier
 //@Named("RealCarServiceImpl")
 public class RealCarServiceImpl implements CarService {

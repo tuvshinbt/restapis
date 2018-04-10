@@ -54,23 +54,23 @@ public class CarRestTest {
     public void tearDown() {
     }
 
-    @Test
-    public void checkBadUrl() {
-        System.out.println("### checkBadUrl() CarRestTest.getCars() using <<< UriBuilder >>>");
-        Response response = client.target(uri).request().post(Entity.entity(null, MediaType.APPLICATION_XML));
-        Assert.assertEquals(Response.Status.BAD_REQUEST, response.getStatus());
-    }
+//    @Test
+//    public void checkBadUrl() {
+//        System.out.println("### checkBadUrl() CarRestTest.getCars() using <<< UriBuilder >>>");
+//        Response response = client.target(uri).request().post(Entity.entity(null, MediaType.APPLICATION_XML));
+//        Assert.assertEquals(Response.Status.BAD_REQUEST, response.getStatus());
+//    }
 
-    @Test
-    public void getCarsTest() {
-        System.out.println("### getCarsTest() CarRestTest.getCars() using <<< EJBContainer >>>");
-        Map<String, Object> properties = new HashMap<>();
-        properties.put(EJBContainer.MODULES, new File("Target/classes"));
-        try (EJBContainer ec = EJBContainer.createEJBContainer(properties)) {
-            Context ctx = ec.getContext();
-            Assert.assertNull(ctx.lookup("java:global/JNDI_TESTDB"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    @Test
+//    public void getCarsTest() {
+//        System.out.println("### getCarsTest() CarRestTest.getCars() using <<< EJBContainer >>>");
+//        Map<String, Object> properties = new HashMap<>();
+//        properties.put(EJBContainer.MODULES, new File("Target/classes"));
+//        try (EJBContainer ec = EJBContainer.createEJBContainer(properties)) {
+//            Context ctx = ec.getContext();
+//            Assert.assertNull(ctx.lookup("java:global/JNDI_TESTDB"));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

@@ -5,23 +5,20 @@
  */
 package bt.pre.restjee.rest;
 
-import bt.pre.Book;
 import bt.pre.ItemRemote;
 import bt.pre.restjee.entity.Car;
 import bt.pre.restjee.entity.Cars;
 import bt.pre.restjee.service.CarService;
-import bt.pre.restjee.service.qualifier.MockCarQualifier;
 import bt.pre.restjee.service.qualifier.RealCarQualifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import javax.ejb.EJB;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -52,6 +49,7 @@ import javax.ws.rs.core.Variant;
 @LocalBean
 @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+@RolesAllowed({"TutorialUser", "employee"})
 public class CarRest {
 
 //    @EJB
@@ -75,9 +73,9 @@ public class CarRest {
 //        String greeting = itemEJB.greeting("TUVSHUU");
 //        return Response.ok("Greeting is - " + greeting).build();
 //    }
-
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+//    @RolesAllowed("TutorialUser")
     public Response getCars(@DefaultValue("application/xml")
             @HeaderParam("Content-type") String contentType,
             @Context Request request) {
