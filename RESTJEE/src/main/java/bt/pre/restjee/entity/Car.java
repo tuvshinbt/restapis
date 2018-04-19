@@ -19,6 +19,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
+{
+  "color": "BLACK",
+  "make": "Toyota",
+  "miles": 0,
+  "model": "Camry",
+  "year": 2018
+}
  * @author tuvshuu
  */
 @Entity
@@ -61,7 +68,6 @@ public class Car implements Serializable {
         return Make;
     }
 
-    @XmlElement
     public void setMake(String Make) {
         this.Make = Make;
     }

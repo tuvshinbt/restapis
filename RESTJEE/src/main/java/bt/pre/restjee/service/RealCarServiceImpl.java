@@ -6,6 +6,8 @@
 package bt.pre.restjee.service;
 
 import bt.pre.restjee.dao.CarDAO;
+import bt.pre.restjee.dao.qualifier.JPACarDAOQualifier;
+import bt.pre.restjee.dao.qualifier.MongoDBCarDAOQualifier;
 import bt.pre.restjee.entity.Car;
 import bt.pre.restjee.service.qualifier.RealCarQualifier;
 import java.util.List;
@@ -22,6 +24,8 @@ import javax.inject.Inject;
 public class RealCarServiceImpl implements CarService {
     
     @Inject
+//    @JPACarDAOQualifier
+    @MongoDBCarDAOQualifier
     private CarDAO carDAO;
     
     @Override

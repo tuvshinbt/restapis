@@ -11,5 +11,15 @@ package bt.pre.restjee.entity;
  */
 public enum Color {
 
-    RED, BLACK, WHITE;
+    RED("RED"), BLACK("BLACK"), WHITE("WHITE");
+    private String value;
+
+    Color(String value) {
+        this.value = value;
+    }
+
+    public String value() {
+        return value;
+    }
+
 }

@@ -9,6 +9,7 @@ import bt.pre.ItemRemote;
 import bt.pre.restjee.entity.Car;
 import bt.pre.restjee.entity.Cars;
 import bt.pre.restjee.service.CarService;
+import bt.pre.restjee.service.MockCarServiceImpl;
 import bt.pre.restjee.service.qualifier.RealCarQualifier;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -64,7 +65,6 @@ public class CarRest {
 
     @Inject
     @RealCarQualifier
-//    @Named("RealCarServiceImpl")
     private CarService carService;
 
 //    @GET

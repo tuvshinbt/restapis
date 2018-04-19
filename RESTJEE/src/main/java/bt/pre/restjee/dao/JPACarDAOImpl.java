@@ -5,6 +5,7 @@
  */
 package bt.pre.restjee.dao;
 
+import bt.pre.restjee.dao.qualifier.JPACarDAOQualifier;
 import bt.pre.restjee.entity.Car;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -16,6 +17,7 @@ import javax.persistence.PersistenceContext;
  * @author tuvshuu
  */
 @Stateless
+@JPACarDAOQualifier
 public class JPACarDAOImpl implements CarDAO {
 
     @PersistenceContext
