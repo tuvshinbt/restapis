@@ -15,6 +15,6 @@ Implemented:
       DATABASE : MSSQL
  # J2EE (SOAP)
       FEATUREs - CDI, WEB-SERVICE, EJB
- # Core Java (SOAP)
+ # Core Java (SOAP CLIENT)
  # SESSION BEANS
       FEATUREs - CDI, EJB
